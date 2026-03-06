@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Induction Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-dark: #1a5c1a;
+      --green-mid: #2e8b2e;
+      --green-logo: #3a7d2c;
+      --gold: #c8a84b;
+      --off-white: #f7f6f2;
+      --border: #c5c0b0;
+      --text: #1a1a1a;
+      --muted: #666;
+      --radius: 4px;
+      --shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #e8e4da;
+      background-image: 
+        radial-gradient(ellipse at 20% 0%, rgba(46,139,46,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 100%, rgba(200,168,75,0.06) 0%, transparent 60%);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: var(--shadow), 0 0 0 1px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      background: var(--green-dark);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .header-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-wrap {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-wrap svg {
+      width: 34px;
+      height: 34px;
+    }
+
+    /* Project banner */
+    .project-banner {
+      background: var(--off-white);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* Form body */
+    .form-body {
+      padding: 1.5rem 2rem 2rem;
+    }
+
+    .section {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #e8e4da;
+    }
+
+    .section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 1rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .grid-1 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .field label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .field input[type="text"],
+    .field input[type="tel"],
+    .field input[type="date"],
+    .field textarea,
+    .field select {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.55rem 0.7rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: #fafaf8;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      width: 100%;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      outline: none;
+      border-color: var(--green-mid);
+      box-shadow: 0 0 0 3px rgba(46,139,46,0.1);
+      background: #fff;
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 72px;
+    }
+
+    /* Y/N question rows */
+    .yn-question {
+      background: #fafaf8;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .yn-question:last-child {
+      margin-bottom: 0;
+    }
+
+    .yn-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .yn-row p {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .yn-buttons {
+      display: flex;
+      gap: 0.4rem;
+      flex-shrink: 0;
+      align-items: flex-start;
+      padding-top: 2px;
+    }
+
+    .yn-btn {
+      width: 36px;
+      height: 30px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      background: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .yn-btn:hover {
+      border-color: var(--green-mid);
+    }
+
+    .yn-btn.selected-y {
+      background: var(--green-mid);
+      border-color: var(--green-mid);
+      color: #fff;
+    }
+
+    .yn-btn.selected-n {
+      background: #c0392b;
+      border-color: #c0392b;
+      color: #fff;
+    }
+
+    .yn-detail {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.5rem 0.7rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      background: #fff;
+      resize: vertical;
+      min-height: 56px;
+      color: var(--text);
+      display: none;
+    }
+
+    .yn-detail.visible {
+      display: block;
+    }
+
+    .yn-detail:focus {
+      outline: none;
+      border-color: var(--green-mid);
+      box-shadow: 0 0 0 3px rgba(46,139,46,0.1);
+    }
+
+    /* Certification block */
+    .cert-block {
+      background: #f0f5f0;
+      border: 1px solid #b5d0b5;
+      border-radius: var(--radius);
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cert-block p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      font-weight: 500;
+      color: var(--green-dark);
+    }
+
+    /* Signature section */
+    .sig-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .sig-box {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .sig-label {
+      background: var(--off-white);
+      border-bottom: 1px solid var(--border);
+      padding: 0.4rem 0.7rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .sig-canvas-wrap {
+      position: relative;
+      background: #fff;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100px;
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    .sig-clear {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 2px 6px;
+      font-size: 0.65rem;
+      cursor: pointer;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .sig-clear:hover {
+      background: #f0f0f0;
+    }
+
+    /* Inductor row */
+    .inductor-row {
+      margin-top: 1rem;
+      background: #fafaf8;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .inductor-row .field {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .inductor-yn {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      align-items: flex-end;
+    }
+
+    .inductor-yn label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* Submit */
+    .submit-wrap {
+      padding: 0 2rem 2rem;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--green-dark);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      padding: 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      letter-spacing: 0.02em;
+    }
+
+    .submit-btn:hover {
+      background: var(--green-mid);
+    }
+
+    .submit-btn:active {
+      transform: scale(0.99);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Toast */
+    .toast {
+      display: none;
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--green-dark);
+      color: #fff;
+      padding: 0.85rem 1.5rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      z-index: 100;
+      white-space: nowrap;
+    }
+
+    .toast.error { background: #c0392b; }
+    .toast.show { display: block; animation: fadeInUp 0.3s ease; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 520px) {
+      .header { padding: 1.2rem 1.2rem; }
+      .header-title { font-size: 1.3rem; }
+      .project-banner { padding: 0.8rem 1.2rem; grid-template-columns: 1fr; }
+      .form-body { padding: 1.2rem; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .sig-section { grid-template-columns: 1fr; }
+      .submit-wrap { padding: 0 1.2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <h1 class="header-title">Project Induction</h1>
+    <div class="logo-wrap">
+      <img src="data:image/png;base64,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" style="width:100%;height:100%;object-fit:contain;" />
+    </div>
+  </div>
+
+  <!-- Project info (pre-filled, read-only) -->
+  <div class="project-banner">
+    <div class="field">
+      <label>Project Name</label>
+      <input type="text" id="projectName" value="Eugowra Sports Ground" readonly style="background:#f0f5f0;font-weight:600;" />
+    </div>
+    <div class="field">
+      <label>Project Number</label>
+      <input type="text" id="projectNumber" value="2041" readonly style="background:#f0f5f0;font-weight:600;" />
+    </div>
+  </div>
+
+  <div class="form-body">
+
+    <!-- Personal Details -->
+    <div class="section">
+      <div class="section-title">Personal Details</div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Inductee Name *</label>
+          <input type="text" id="inducteeName" placeholder="Full name" required />
+        </div>
+        <div class="field">
+          <label>Contact Number *</label>
+          <input type="tel" id="contactNumber" placeholder="Mobile number" required />
+        </div>
+        <div class="field">
+          <label>Next of Kin & Relationship *</label>
+          <input type="text" id="nextOfKin" placeholder="e.g. Jane Smith (Wife)" required />
+        </div>
+        <div class="field">
+          <label>Next of Kin Contact Number *</label>
+          <input type="tel" id="nokContact" placeholder="Mobile number" required />
+        </div>
+        <div class="field">
+          <label>Address</label>
+          <input type="text" id="address" placeholder="Street address" />
+        </div>
+        <div class="field">
+          <label>Suburb</label>
+          <input type="text" id="suburb" placeholder="Suburb" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Employment -->
+    <div class="section">
+      <div class="section-title">Employment</div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Employer / Company *</label>
+          <input type="text" id="employer" placeholder="Company name" required />
+        </div>
+        <div class="field">
+          <label>Supervisor</label>
+          <input type="text" id="supervisor" placeholder="Supervisor name" />
+        </div>
+        <div class="field">
+          <label>General Induction Number</label>
+          <input type="text" id="inductionNumber" placeholder="White card / induction number" />
+        </div>
+        <div class="field">
+          <label>Date on Card</label>
+          <input type="date" id="cardDate" />
+        </div>
+      </div>
+      <div class="grid-1" style="margin-top:0.75rem;">
+        <div class="field">
+          <label>Brief description of work you will be carrying out on this project *</label>
+          <textarea id="workDescription" placeholder="Describe your scope of work..." required></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Y/N Questions -->
+    <div class="section">
+      <div class="section-title">Health, Safety & Training</div>
+
+      <div class="yn-question">
+        <div class="yn-row">
+          <p>Have you completed any additional Health &amp; Safety training? (e.g. First Aid, Height Awareness, Supervisors Course, Confined Space)</p>
+          <div class="yn-buttons">
+            <button type="button" class="yn-btn" data-field="q1" data-val="Y">Y</button>
+            <button type="button" class="yn-btn" data-field="q1" data-val="N">N</button>
+          </div>
+        </div>
+        <textarea class="yn-detail" id="q1Detail" placeholder="Please state the training completed..."></textarea>
+        <input type="hidden" id="q1" value="" />
+      </div>
+
+      <div class="yn-question">
+        <div class="yn-row">
+          <p>Have you completed any Environmental / Industrial or other training courses relative to this project? (e.g. Environmental Risk, Workplace Relations, Green Star)</p>
+          <div class="yn-buttons">
+            <button type="button" class="yn-btn" data-field="q2" data-val="Y">Y</button>
+            <button type="button" class="yn-btn" data-field="q2" data-val="N">N</button>
+          </div>
+        </div>
+        <textarea class="yn-detail" id="q2Detail" placeholder="Please state the courses completed..."></textarea>
+        <input type="hidden" id="q2" value="" />
+      </div>
+
+      <div class="yn-question">
+        <div class="yn-row">
+          <p>Are you using or operating plant or equipment which requires a ticket or permit? (e.g. Elevated Platform, Power Actuated Fixing, Earthmoving, Crane)</p>
+          <div class="yn-buttons">
+            <button type="button" class="yn-btn" data-field="q3" data-val="Y">Y</button>
+            <button type="button" class="yn-btn" data-field="q3" data-val="N">N</button>
+          </div>
+        </div>
+        <textarea class="yn-detail" id="q3Detail" placeholder="Please state ticket/permit number and date issued..."></textarea>
+        <input type="hidden" id="q3" value="" />
+      </div>
+
+      <div class="yn-question">
+        <div class="yn-row">
+          <p>Do you suffer from any illness or are you allergic to any medication?</p>
+          <div class="yn-buttons">
+            <button type="button" class="yn-btn" data-field="q4" data-val="Y">Y</button>
+            <button type="button" class="yn-btn" data-field="q4" data-val="N">N</button>
+          </div>
+        </div>
+        <textarea class="yn-detail" id="q4Detail" placeholder="Please state the illness or allergy..."></textarea>
+        <input type="hidden" id="q4" value="" />
+      </div>
+
+      <div class="yn-question">
+        <div class="yn-row">
+          <p>Have you been trained &amp; signed the site-specific SWMS including hazards and risks for this project from your employer or company?</p>
+          <div class="yn-buttons">
+            <button type="button" class="yn-btn" data-field="q5" data-val="Y">Y</button>
+            <button type="button" class="yn-btn" data-field="q5" data-val="N">N</button>
+          </div>
+        </div>
+        <input type="hidden" id="q5" value="" />
+      </div>
+
+    </div>
+
+    <!-- Certification -->
+    <div class="section">
+      <div class="cert-block">
+        <p>I certify that I have been inducted and trained in the project, specific hazards and conditions, access to and from the site and associated OHS &amp; Environmental aspects of the site. I confirm I understand the current project conditions and will attend site meetings as required.</p>
+      </div>
+
+      <div class="sig-section">
+        <div class="sig-box">
+          <div class="sig-label">Inductee Signature *</div>
+          <div class="sig-canvas-wrap">
+            <canvas id="sigInductee" width="300" height="100"></canvas>
+            <button type="button" class="sig-clear" onclick="clearCanvas('sigInductee', 'sigInducteeData')">Clear</button>
+          </div>
+          <input type="hidden" id="sigInducteeData" />
+        </div>
+        <div class="field" style="justify-content:flex-start;gap:0.3rem;padding-top:0;">
+          <div class="sig-box" style="width:100%;">
+            <div class="sig-label">Date Signed *</div>
+            <div style="padding:0.6rem 0.7rem;">
+              <input type="date" id="signDate" style="border:1px solid var(--border);border-radius:4px;padding:0.45rem 0.6rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;width:100%;background:#fafaf8;" required />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inductor row -->
+      <div class="inductor-row">
+        <div class="field">
+          <label>Inductor Name</label>
+          <input type="text" id="inductorName" placeholder="Inductor full name" />
+        </div>
+        <div class="inductor-yn">
+          <label>Received &amp; Reviewed Documentation</label>
+          <div class="yn-buttons">
+            <button type="button" class="yn-btn" data-field="qInductor" data-val="Y">Y</button>
+            <button type="button" class="yn-btn" data-field="qInductor" data-val="N">N</button>
+          </div>
+          <input type="hidden" id="qInductor" value="" />
+        </div>
+      </div>
+
+    </div>
+
+  </div><!-- /form-body -->
+
+  <div class="submit-wrap">
+    <button type="button" class="submit-btn" id="submitBtn" onclick="submitForm()">Submit Induction Form</button>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ─── CONFIGURATION ───────────────────────────────────────────────
+  // Paste your Make.com webhook URL here once you've set it up:
+  const MAKE_WEBHOOK_URL = "https://hook.us1.make.com/YOUR_WEBHOOK_URL_HERE";
+  // ─────────────────────────────────────────────────────────────────
+
+  // Y/N button logic
+  document.querySelectorAll('.yn-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const field = this.dataset.field;
+      const val = this.dataset.val;
+      // Deselect siblings
+      document.querySelectorAll(`.yn-btn[data-field="${field}"]`).forEach(b => {
+        b.classList.remove('selected-y', 'selected-n');
+      });
+      // Select this
+      this.classList.add(val === 'Y' ? 'selected-y' : 'selected-n');
+      document.getElementById(field).value = val;
+      // Show/hide detail textarea
+      const detail = document.getElementById(field + 'Detail');
+      if (detail) {
+        if (val === 'Y') {
+          detail.classList.add('visible');
+          detail.focus();
+        } else {
+          detail.classList.remove('visible');
+          detail.value = '';
+        }
+      }
+    });
+  });
+
+  // ─── Signature Canvas ────────────────────────────────────────────
+  function initCanvas(canvasId, dataId) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    // Retina / device pixel ratio
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * dpr || 300 * dpr;
+    canvas.height = 100 * dpr;
+    ctx.scale(dpr, dpr);
+    ctx.strokeStyle = '#1a1a1a';
+    ctx.lineWidth = 1.8;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    let drawing = false;
+    let lastX = 0, lastY = 0;
+
+    function getPos(e) {
+      const r = canvas.getBoundingClientRect();
+      if (e.touches) {
+        return { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top };
+      }
+      return { x: e.clientX - r.left, y: e.clientY - r.top };
+    }
+
+    function startDraw(e) {
+      e.preventDefault();
+      drawing = true;
+      const pos = getPos(e);
+      lastX = pos.x; lastY = pos.y;
+    }
+
+    function draw(e) {
+      if (!drawing) return;
+      e.preventDefault();
+      const pos = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+      lastX = pos.x; lastY = pos.y;
+    }
+
+    function endDraw() {
+      if (!drawing) return;
+      drawing = false;
+      document.getElementById(dataId).value = canvas.toDataURL();
+    }
+
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', endDraw);
+    canvas.addEventListener('mouseleave', endDraw);
+    canvas.addEventListener('touchstart', startDraw, { passive: false });
+    canvas.addEventListener('touchmove', draw, { passive: false });
+    canvas.addEventListener('touchend', endDraw);
+  }
+
+  function clearCanvas(canvasId, dataId) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById(dataId).value = '';
+  }
+
+  window.addEventListener('load', () => {
+    initCanvas('sigInductee', 'sigInducteeData');
+  });
+
+  // ─── Toast ───────────────────────────────────────────────────────
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `toast ${type} show`;
+    setTimeout(() => t.classList.remove('show'), 4000);
+  }
+
+  // ─── Submit ──────────────────────────────────────────────────────
+  async function submitForm() {
+    // Basic validation
+    const required = ['inducteeName','contactNumber','nextOfKin','nokContact','employer','workDescription','signDate'];
+    for (const id of required) {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.focus();
+        el.style.borderColor = '#c0392b';
+        el.style.boxShadow = '0 0 0 3px rgba(192,57,43,0.15)';
+        setTimeout(() => { el.style.borderColor = ''; el.style.boxShadow = ''; }, 2000);
+        showToast('Please fill in all required fields.', 'error');
+        return;
+      }
+    }
+
+    if (!document.getElementById('sigInducteeData').value) {
+      showToast('Please provide your signature.', 'error');
+      return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    const payload = {
+      submittedAt: new Date().toISOString(),
+      projectName: document.getElementById('projectName').value,
+      projectNumber: document.getElementById('projectNumber').value,
+      inducteeName: document.getElementById('inducteeName').value,
+      contactNumber: document.getElementById('contactNumber').value,
+      nextOfKin: document.getElementById('nextOfKin').value,
+      nokContact: document.getElementById('nokContact').value,
+      address: document.getElementById('address').value,
+      suburb: document.getElementById('suburb').value,
+      employer: document.getElementById('employer').value,
+      supervisor: document.getElementById('supervisor').value,
+      inductionNumber: document.getElementById('inductionNumber').value,
+      cardDate: document.getElementById('cardDate').value,
+      workDescription: document.getElementById('workDescription').value,
+      q1_hs_training: document.getElementById('q1').value,
+      q1_hs_training_detail: document.getElementById('q1Detail').value,
+      q2_env_training: document.getElementById('q2').value,
+      q2_env_training_detail: document.getElementById('q2Detail').value,
+      q3_plant_ticket: document.getElementById('q3').value,
+      q3_plant_ticket_detail: document.getElementById('q3Detail').value,
+      q4_illness: document.getElementById('q4').value,
+      q4_illness_detail: document.getElementById('q4Detail').value,
+      q5_swms_signed: document.getElementById('q5').value,
+      signDate: document.getElementById('signDate').value,
+      inductorName: document.getElementById('inductorName').value,
+      inductorDocsReviewed: document.getElementById('qInductor').value,
+      signature: document.getElementById('sigInducteeData').value
+    };
+
+    try {
+      const res = await fetch(MAKE_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        showToast('✓ Induction submitted successfully!');
+        btn.textContent = '✓ Submitted';
+        btn.style.background = '#27ae60';
+      } else {
+        throw new Error('Server error');
+      }
+    } catch (err) {
+      showToast('Submission failed. Please try again.', 'error');
+      btn.disabled = false;
+      btn.textContent = 'Submit Induction Form';
+    }
+  }
+</script>
+
+</body>
+</html>
